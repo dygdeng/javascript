@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>构造函数模式创建对象</title>
+</head>
+<body>
+    <script>
+       function Person(name,age){
+          this.name = name;
+          this.age = age;
+          this.sayName = function(){
+              console.log(this.name);
+          }
+       }
+
+       var personFirst = new Person('adams',39);
+       var personTwo = new Person('hongjie',38);
+
+       console.log(personFirst);//显示对象1
+       console.log(personTwo);//显示对象2
+
+       console.log(personFirst.constructor == Person)
+       console.log(personTwo.constructor == Person)
+
+       //当做构造函数使用
+       var person = new Person('yuhuan',9);
+       person.sayName();
+
+       //当做普通函数使用
+       Person('yuhuan',9);
+       window.sayName();
+
+       //在另一个对象作用域使用
+       var newPerson = new Object();
+       Person.call(newPerson,'yuhuan1',9)
+       newPerson.sayName();
+    </script>
+    
+</body>
+</html>
