@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>javascript计时器功能</title>
+</head>
+<body>
+    <div id="timer"></div>
+    <p><input type="button" value="开始" id="begin"><input type="button" value="停止" id="over"></p>
+    <script>
+        //计时器通用定义
+        var hour = 0,minute = 0,second = 0;
+        var timebox = document.getElementById('timer');
+        var begin = document.getElementById('begin');
+        var over = document.getElementById('over');
+
+        //时间初始化
+        timebox.innerHTML = "00:00:00";
+
+        //计时方法
+        function timePlay(){
+
+           this.timestyle = function(a) {
+               return a<10?"0"+a:a;
+           }
+
+           //运行结构
+           this.timer = function () {
+               var showhour = timestyle(hour);
+               var showminute = timestyle(minute);
+               var showsecond = timestyle(second);
+
+               timebox.innerHTML = showhour+":"+showminute+":"+showsecond;
+
+               second++;
+
+               if(second >= 60){
+                 second = 0;
+                 minute++;
+               }
+
+               if(minute>=60){
+                   minute = 0;
+                   hour++;
+               }
+
+               timebegin = setTimeout('timer()',1000);
+           }
+
+           timer();
+
+        }
+
+        //点击开始
+        begin.addEventListener('click',function(){
+            timePlay();
+        });
+        //点击停止
+        over.addEventListener('click',function(){
+            clearTimeout(timebegin);
+        });
+
+    </script>
+</body>
+</html>
