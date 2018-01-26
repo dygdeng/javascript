@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://tools.people.com.cn/libs/jquery/1.11.1/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <title>数组对比方法</title>
+    <script>
+      $(document).ready(function(){
+
+        var arr = [];
+        arr[0] = [37,15,36,"B1"];
+        arr[1] = [37,13,37,"B2"];
+        arr[2] = [37,18,92,"A1"];
+        arr[3] = [37,35,68,"A1"];
+
+        var userarr = [];
+        
+        //比较数组
+    
+        //递归函数
+        function arrs(fenzhi,user){
+
+            var fenzhilength = fenzhi.length;
+            var userlength = user.length;
+            var computer = [];
+            
+
+            for (let index = 0; index < fenzhilength; index++) {
+                // for (let j = 0; j < fenzhilength; j++) {
+                //     if(user[index] == fenzhi[index][j]){
+
+                //         computer.push(fenzhi[index][j+1]);
+
+                //     }
+                // }
+
+                var fenzhiarr = fenzhi[index].slice(0,userlength);
+
+                console.log(JSON.stringify(fenzhiarr))
+                console.log(JSON.stringify(user))
+                
+                if(JSON.stringify(fenzhiarr) == JSON.stringify(user) && fenzhi[index].length >= userlength){
+                    computer.push(fenzhi[index][userlength]);
+                }
+
+            }
+           
+            console.log(computer)
+            return computer[Math.floor((Math.random()*computer.length))];
+
+        }
+        $(document).on("click","#dian",function(){
+            var data = parseInt($(this).attr('data'));
+            userarr.push(data);
+            var one = arrs(arr,userarr);
+            console.log(one)
+        })
+        $(document).on("click","#dian1",function(){
+          var data = $(this).attr('data');
+          newarr.push(data);
+          var one = arrs(arr,newarr);
+            console.log(one)
+        })
+      })
+    </script>
+</head>
+<body>
+        <input type="button" data="37" value="点击" id="dian" />
+        <input type="button" data="18" value="点击" id="dian1" />
+</body>
+</html>
