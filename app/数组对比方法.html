@@ -10,8 +10,8 @@
       $(document).ready(function(){
 
         var arr = [];
-        arr[0] = [37,15,36,"B1"];
-        arr[1] = [37,13,37,"B2"];
+        arr[0] = [37,18,36,"B1"];
+        arr[1] = [37,18,37,"B2"];
         arr[2] = [37,18,92,"A1"];
         arr[3] = [37,35,68,"A1"];
 
@@ -37,9 +37,6 @@
                 // }
 
                 var fenzhiarr = fenzhi[index].slice(0,userlength);
-
-                console.log(JSON.stringify(fenzhiarr))
-                console.log(JSON.stringify(user))
                 
                 if(JSON.stringify(fenzhiarr) == JSON.stringify(user) && fenzhi[index].length >= userlength){
                     computer.push(fenzhi[index][userlength]);
@@ -51,23 +48,41 @@
             return computer[Math.floor((Math.random()*computer.length))];
 
         }
+        //自动走棋子
+        var two;
+        function autoplay(size){
+            userarr.push(size);
+            two = arrs(arr,userarr);
+            console.log(two)
+        }
+
+        //触发事件
         $(document).on("click","#dian",function(){
             var data = parseInt($(this).attr('data'));
             userarr.push(data);
             var one = arrs(arr,userarr);
             console.log(one)
+            setTimeout(function(){
+                autoplay(one);
+            },1000)
         })
         $(document).on("click","#dian1",function(){
-          var data = $(this).attr('data');
-          newarr.push(data);
-          var one = arrs(arr,newarr);
+          var data =  parseInt($(this).attr('data'));
+          userarr.push(data);
+          
+          if(data == two){
+            var one = arrs(arr,userarr);
             console.log(one)
+          }else{
+              console.log("点击错误")
+          }
+          
         })
       })
     </script>
 </head>
 <body>
         <input type="button" data="37" value="点击" id="dian" />
-        <input type="button" data="18" value="点击" id="dian1" />
+        <input type="button" data="92" value="点击" id="dian1" />
 </body>
 </html>
