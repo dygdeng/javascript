@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类式继承</title>
+</head>
+<body>
+    <script>
+     //创建父类
+      function Sheap(){
+          this.x = 0;
+          this.y = 0;
+      }
+
+      //父类的方法
+      Sheap.prototype.move = function(x,y){
+          this.x += x;
+          this.y += y;
+          console.info("Sheap move");
+      }
+
+      //创建子类
+      function subSheap(){
+          Sheap.call(this);
+      }
+
+      //子类继承父类
+      subSheap.prototype = Object.create(Sheap.prototype);
+      subSheap.prototype.constructor = subSheap;
+
+      var rect = new subSheap();
+      rect.move(1,1);
+      
+    </script>
+</body>
+</html>
