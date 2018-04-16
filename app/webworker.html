@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>webworker</title>
+</head>
+<body>
+    <input type="button" id="first" value="第一次发送">
+    <input type="button" id="two" value="第二次发送">
+    <input type="text" id="times">
+    <span id="timehtml"></span>
+
+    <script>
+        if(window.Worker){
+            console.info("可运行worker");
+            var myWorker = new Worker("worker.js");
+  
+            var first = document.getElementById("first");
+        
+            first.addEventListener("click",function(e){
+               myWorker.postMessage("发送出来的消息！");
+            })
+        }
+
+
+        window.addEventListener( 'blur', function() { 
+            myWorker.postMessage();
+        } );
+        window.addEventListener( 'focus', function() { console.log( 'focus' ); } );
+
+                myWorker.onmessage = function(e) {
+        console.log(e.data);
+        }
+      </script>
+</body>
+</html>
