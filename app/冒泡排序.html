@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>冒泡排序算法</title>
+</head>
+<body>
+    <script>
+        var listArray = [45,12,35,110,43,78,23,12];
+
+        // function bubbleSort(arr) {
+        //     var len = arr.length;
+        //     for (var i = 0; i < len; i++) {
+        //         for (var j = 0; j < len - 1 - i; j++) {
+        //             if (arr[j] > arr[j+1]) {        //相邻元素两两对比
+        //                 var temp = arr[j+1];        //元素交换
+        //                 arr[j+1] = arr[j];
+        //                 arr[j] = temp;
+        //             }
+        //         }
+        //         //console.info(arr)
+        //     }
+        //     return arr;
+        // }
+
+        // var arrarySub = bubbleSort(listArray);
+        // console.info(arrarySub);
+
+        Array.prototype.sortBig = function(){
+            var len = this.length;
+            for (var i = 0; i < len; i++) {
+                for (var j = 0; j < len-1-i; j++) {
+                    if(this[j]>this[j+1]){
+                        var temp = this[j+1];
+                        this[j+1] = this[j];
+                        this[j] = temp;
+                    }
+                }
+            }
+            return this;
+        }
+
+        var alist = listArray.sortBig();
+        console.info(alist)
+
+    </script>
+</body>
+</html>

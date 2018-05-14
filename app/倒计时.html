@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>倒计时方法</title>
+</head>
+<body>
+    <div id="time"></div>
+    <div id="over"></div>
+
+    <script>
+        var ctime;
+        var times0;
+        var times;
+        var times_timeout;
+
+        var countTime = function (timeState, id, time, fuc) {
+            
+            this.timeState = timeState;
+            this.time = time;
+            this.fuc = fuc;
+    
+            this.timeSize = function () {
+    
+                //关闭倒计时状态
+                if (timeState == 0) {
+                    stopsetTimeout();
+                    return;
+                }
+    
+                //倒计时样式改变
+                id.innerHTML = time;
+
+                time--;//倒计时计算
+    
+                //console.log('time:'+time);
+    
+                //倒计时完成状态
+                if (time < 0) {
+                    //console.log(time);
+                    onfinish();
+                    return;
+                }
+    
+                ctime = setTimeout('timeSize()', 1000);
+            };
+    
+            //倒计时完成回调函数
+            this.onfinish = function () {
+                fuc.call(this);//回调~~~
+            };
+    
+            //停止倒计时回调函数
+            this.stopsetTimeout = function () {
+                //fuc.call(this);
+            };
+    
+            timeSize();
+        };
+    
+        
+        var timeid = document.getElementById("time");
+        var over = document.getElementById("over");
+
+        countTime(1, timeid, 10, function () {
+                console.log("停止倒计时！");
+                over.innerHTML = "倒计时停止！";
+            });
+        </script>
+</body>
+</html>
